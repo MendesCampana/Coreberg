@@ -1,6 +1,8 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CorebergWindowsFormsInstaller
 {
@@ -26,6 +28,9 @@ namespace CorebergWindowsFormsInstaller
                     }
                     else
                     {
+                        Task t1 = new Task(() => {});
+                        t1.Start();
+                        await t1;
                         progressBar1.PerformStep();
                         button1.Text = "Дождитесь завершения установки";
                         string company = comboBox1.SelectedItem.ToString();
@@ -38,6 +43,10 @@ namespace CorebergWindowsFormsInstaller
                                 label1.Text = "Удаляем Teamviewer";
                                 Application.DoEvents();
                                 TeamViewer.Uninstall();
+                                
+                                t1 = new Task(() => {});
+                                t1.Start();
+                                await t1;
 
                                 progressBar1.PerformStep();
                                 label1.Text = "Устанавливаем Teamviewer";
@@ -51,6 +60,10 @@ namespace CorebergWindowsFormsInstaller
                             }
                             else
                             {
+                                t1 = new Task(() => {});
+                                t1.Start();
+                                await t1;
+                                
                                 progressBar1.PerformStep();
                                 label1.Text = "Устанавливаем Teamviewer";
                                 Application.DoEvents();
@@ -61,6 +74,9 @@ namespace CorebergWindowsFormsInstaller
                                 else TeamViewer.Install(company, tag, false);
                             }
                         }
+                        t1 = new Task(() => {});
+                        t1.Start();
+                        await t1;
                         progressBar1.PerformStep();
                         Application.DoEvents();
 
@@ -70,6 +86,9 @@ namespace CorebergWindowsFormsInstaller
                             Application.DoEvents();
                             OCS.Install(company, tag);
                         }
+                        t1 = new Task(() => {});
+                        t1.Start();
+                        await t1;
                         progressBar1.PerformStep();
                         Application.DoEvents();
 
@@ -79,6 +98,9 @@ namespace CorebergWindowsFormsInstaller
                             Application.DoEvents();
                             DesktopInfo.Install();
                         }
+                        t1 = new Task(() => {});
+                        t1.Start();
+                        await t1;
                         progressBar1.Value=100;
                         label1.Text = "Устанавка завершена";
                         button1.Text = "НАЧАТЬ УСТАНОВКУ";
